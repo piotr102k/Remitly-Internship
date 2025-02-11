@@ -16,19 +16,19 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ExceptionResponseDTO> handleResourceNotFoundException(ResourceNotFoundException ex) {
-        ExceptionResponseDTO response = new ExceptionResponseDTO(Instant.now(),ex.getMessage(),404);
+        ExceptionResponseDTO response = new ExceptionResponseDTO(ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<ExceptionResponseDTO> handleBadRequestException(BadRequestException ex) {
-        ExceptionResponseDTO response = new ExceptionResponseDTO(Instant.now(),ex.getMessage(),400);
+        ExceptionResponseDTO response = new ExceptionResponseDTO(ex.getMessage());
         return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionResponseDTO> handleGeneralException(Exception ex) {
-        ExceptionResponseDTO response = new ExceptionResponseDTO(Instant.now(),ex.getMessage(),500);
+        ExceptionResponseDTO response = new ExceptionResponseDTO(ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
