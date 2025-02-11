@@ -1,8 +1,8 @@
 package remitly.bank_identifier_code.mapper;
 
-import remitly.bank_identifier_code.dto.BankBranchDTO;
-import remitly.bank_identifier_code.dto.BankCountryDTO;
-import remitly.bank_identifier_code.dto.BankDTO;
+import remitly.bank_identifier_code.dto.Bank.BankBranchDTO;
+import remitly.bank_identifier_code.dto.Bank.BankCountryDTO;
+import remitly.bank_identifier_code.dto.Bank.BankDTO;
 import remitly.bank_identifier_code.entity.Bank;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +27,8 @@ public class BankMapper {
         return new Bank(
                 bankDTO.getAddress(),
                 bankDTO.getBankName(),
-                bankDTO.getCountryISO2(),
-                bankDTO.getCountryName(),
+                bankDTO.getCountryISO2().toUpperCase(),
+                bankDTO.getCountryName().toUpperCase(),
                 bankDTO.isHeadquarter(),
                 bankDTO.getSwiftCode()
         );
