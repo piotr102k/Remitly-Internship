@@ -35,7 +35,7 @@ public class BankMapper {
     }
 
     public static BankDTO mapToBankDTO(Bank bank, List<Bank> bankBranches) {
-        List<BankBranchDTO> formattedBranches=new ArrayList<BankBranchDTO>();
+        List<BankBranchDTO> formattedBranches=new ArrayList<>();
         for (Bank b : bankBranches) {
             if(!Objects.equals(b.getSwiftCode(), bank.getSwiftCode())) {
                 formattedBranches.add(toBankBranchDTO(b));
@@ -66,7 +66,7 @@ public class BankMapper {
     }
 
     public static BankCountryDTO mapToBankCountryDTO(String iso, String name, List<Bank> branches){
-        List<BankBranchDTO> formattedBranches=new ArrayList<BankBranchDTO>();
+        List<BankBranchDTO> formattedBranches=new ArrayList<>();
         for (Bank b : branches) {
             formattedBranches.add(toBankBranchDTO(b));
         }

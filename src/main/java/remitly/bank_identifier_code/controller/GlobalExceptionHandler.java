@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import remitly.bank_identifier_code.dto.ExceptionResponseDTO;
 import remitly.bank_identifier_code.exception.BadRequestException;
 import remitly.bank_identifier_code.exception.ResourceNotFoundException;
-import java.security.Timestamp;
-import java.time.Instant;
 
 
 @RestControllerAdvice
