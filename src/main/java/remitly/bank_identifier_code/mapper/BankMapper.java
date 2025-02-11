@@ -1,14 +1,61 @@
 package remitly.bank_identifier_code.mapper;
 
 import remitly.bank_identifier_code.dto.BankBranchDTO;
-import remitly.bank_identifier_code.dto.BankHeadquarterDTO;
+import remitly.bank_identifier_code.dto.BankCountryDTO;
+import remitly.bank_identifier_code.dto.BankDTO;
 import remitly.bank_identifier_code.entity.Bank;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+
 
 public class BankMapper {
-    public static BankBranchDTO mapToBankBranchDTO(Bank bank) {
+
+
+    public static BankBranchDTO toBankBranchDTO(Bank bank) {
         return new BankBranchDTO(
+                bank.getAddress(),
+                bank.getBankName(),
+                bank.getCountryISO2(),
+                bank.isHeadquarter(),
+                bank.getSwiftCode()
+        );
+    }
+
+    public static Bank mapFromBankDTO(BankDTO bankDTO) {
+        return new Bank(
+                bankDTO.getAddress(),
+                bankDTO.getBankName(),
+                bankDTO.getCountryISO2(),
+                bankDTO.getCountryName(),
+                bankDTO.isHeadquarter(),
+                bankDTO.getSwiftCode()
+        );
+    }
+
+    public static BankDTO mapToBankDTO(Bank bank, List<Bank> bankBranches) {
+        List<BankBranchDTO> formattedBranches=new ArrayList<BankBranchDTO>();
+        for (Bank b : bankBranches) {
+            if(!Objects.equals(b.getSwiftCode(), bank.getSwiftCode())) {
+                formattedBranches.add(toBankBranchDTO(b));
+            }
+        }
+
+        return new BankDTO(
+                bank.getAddress(),
+                bank.getBankName(),
+                bank.getCountryISO2(),
+                bank.getCountryName(),
+                bank.isHeadquarter(),
+                bank.getSwiftCode(),
+                formattedBranches
+        );
+    }
+
+    public static BankDTO mapToBankDTO(Bank bank) {
+
+        return new BankDTO(
                 bank.getAddress(),
                 bank.getBankName(),
                 bank.getCountryISO2(),
@@ -18,19 +65,15 @@ public class BankMapper {
         );
     }
 
-    public static BankHeadquarterDTO mapToBankHeadquarterDTO(Bank bank, Bank[] branches) {
-        List<BankHeadquarterDTO.Branch> formattedBranches=new ArrayList<BankHeadquarterDTO.Branch>();
+    public static BankCountryDTO mapToBankCountryDTO(String iso, String name, List<Bank> branches){
+        List<BankBranchDTO> formattedBranches=new ArrayList<BankBranchDTO>();
         for (Bank b : branches) {
-            formattedBranches.add(new BankHeadquarterDTO.Branch(b.getAddress(),b.getBankName(),b.getCountryISO2(),b.isHeadquarter(),b.getSwiftCode()));
+            formattedBranches.add(toBankBranchDTO(b));
         }
 
-        return new BankHeadquarterDTO(
-                bank.getAddress(),
-                bank.getBankName(),
-                bank.getCountryISO2(),
-                bank.getCountryName(),
-                bank.isHeadquarter(),
-                bank.getSwiftCode(),
+        return new BankCountryDTO(
+                iso,
+                name,
                 formattedBranches
         );
     }
