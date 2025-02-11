@@ -32,7 +32,7 @@ public class BankUnitTests {
 
     @Test
     void returnsBankBySwiftCode(){
-        Bank mockBank = new Bank("test_address","test_name","TT","Testland",false,"TESTTEST123");
+        Bank mockBank = new Bank("test_address","test_name","TT","TESTLAND",false,"TESTTEST123");
         when(bankRepository.findById("TESTTEST123")).thenReturn(Optional.of(mockBank));
 
         BankDTO bank = bankServiceImpl.getSwiftCode("TESTTEST123");
@@ -55,14 +55,14 @@ public class BankUnitTests {
 
     @Test
     void returnsBankByCountry(){
-        Bank mockBank = new Bank("test_address","test_name","TT","Testland",false,"TESTTEST123");
+        Bank mockBank = new Bank("test_address","test_name","TT","TESTLAND",false,"TESTTEST123");
         List<Bank> mockBanks = List.of(mockBank);
         when(bankRepository.findAllByCountryISO2("TT")).thenReturn(mockBanks);
 
         BankCountryDTO banksByCountry = bankServiceImpl.getSwiftCodesByCountry("TT");
 
         assertNotNull(banksByCountry);
-        assertEquals("Testland",banksByCountry.getCountryName());
+        assertEquals("TESTLAND",banksByCountry.getCountryName());
         assertEquals("TESTTEST123",banksByCountry.getSwiftCodes().get(0).getSwiftCode());
     }
 
@@ -77,7 +77,7 @@ public class BankUnitTests {
 
     @Test
     void createsSwiftCodeEntry(){
-        BankDTO mockBank = new BankDTO("test_address","test_name","TT","Testland",false,"TESTTEST123");
+        BankDTO mockBank = new BankDTO("test_address","test_name","TT","TESTLAND",false,"TESTTEST123");
         when(bankRepository.existsById("TESTTEST123")).thenReturn(false);
 
         String response = bankServiceImpl.createSwiftCodeEntry(mockBank);
@@ -88,7 +88,7 @@ public class BankUnitTests {
 
     @Test
     void createSwiftCodeEntryThrowsExceptionWhenIncorrectISO2IsGiven(){
-        BankDTO mockBank = new BankDTO("test_address","test_name","WRONG","Testland",false,"TESTTEST123");
+        BankDTO mockBank = new BankDTO("test_address","test_name","WRONG","TESTLAND",false,"TESTTEST123");
 
 
         Exception exception = assertThrows(BadRequestException.class, () -> {
@@ -101,7 +101,7 @@ public class BankUnitTests {
 
     @Test
     void createSwiftCodeEntryThrowsExceptionWhenIncorrectSwiftCodeIsGiven(){
-        BankDTO mockBank = new BankDTO("test_address","test_name","TT","Testland",false,"WRONG");
+        BankDTO mockBank = new BankDTO("test_address","test_name","TT","TESTLAND",false,"WRONG");
 
         Exception exception = assertThrows(BadRequestException.class, () -> {
             bankServiceImpl.createSwiftCodeEntry(mockBank);
@@ -112,7 +112,7 @@ public class BankUnitTests {
 
     @Test
     void createSwiftCodeEntryThrowsExceptionWhenSwiftCodeAlreadyExists(){
-        BankDTO mockBank = new BankDTO("test_address","test_name","TT","Testland",false,"TESTTEST123");
+        BankDTO mockBank = new BankDTO("test_address","test_name","TT","TESTLAND",false,"TESTTEST123");
         when(bankRepository.existsById("TESTTEST123")).thenReturn(true);
 
         Exception exception = assertThrows(BadRequestException.class, () -> {
