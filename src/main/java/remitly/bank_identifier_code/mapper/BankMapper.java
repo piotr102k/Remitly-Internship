@@ -8,10 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
-
 public class BankMapper {
-
 
     public static BankBranchDTO toBankBranchDTO(Bank bank) {
         return new BankBranchDTO(

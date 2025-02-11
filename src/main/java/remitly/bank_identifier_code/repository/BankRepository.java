@@ -5,7 +5,6 @@ import remitly.bank_identifier_code.entity.Bank;
 
 import java.util.List;
 
-
 public interface BankRepository extends JpaRepository<Bank,String> {
     List<Bank> findAllBySwiftCodeStartingWith(String code);
     List<Bank> findAllByCountryISO2(String countryISO2);
