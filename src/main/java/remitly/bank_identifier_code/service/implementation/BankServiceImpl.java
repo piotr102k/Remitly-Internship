@@ -2,16 +2,16 @@ package remitly.bank_identifier_code.service.implementation;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import remitly.bank_identifier_code.dto.BankCountryDTO;
-import remitly.bank_identifier_code.dto.BankDTO;
+import remitly.bank_identifier_code.dto.Bank.BankCountryDTO;
+import remitly.bank_identifier_code.dto.Bank.BankDTO;
 import remitly.bank_identifier_code.entity.Bank;
+import remitly.bank_identifier_code.exception.BadRequestException;
 import remitly.bank_identifier_code.exception.ResourceNotFoundException;
 import remitly.bank_identifier_code.mapper.BankMapper;
 import remitly.bank_identifier_code.repository.BankRepository;
 import remitly.bank_identifier_code.service.BankService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -43,6 +43,16 @@ public class BankServiceImpl implements BankService {
 
     @Override
     public String createSwiftCodeEntry(BankDTO bankDTO) {
+        if(bankDTO.getCountryISO2().length()!=2){
+            throw  new BadRequestException("Country ISO2 code must have a length of 2");
+        }
+        if(bankDTO.getSwiftCode().length()!=11){
+            throw  new BadRequestException("Swift code  must have a length of 11");
+        }
+        if(bankRepository.existsById(bankDTO.getSwiftCode())){
+            throw  new BadRequestException("Duplicate Swift code "+bankDTO.getSwiftCode());
+        }
+
         Bank bank = BankMapper.mapFromBankDTO(bankDTO);
         bankRepository.save(bank);
         return "New SWIFT code entry has been created";

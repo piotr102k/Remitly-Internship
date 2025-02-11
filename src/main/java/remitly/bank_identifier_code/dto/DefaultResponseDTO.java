@@ -9,10 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BankBranchDTO {
-    private String address;
-    private String bankName;
-    private String countryISO2;
-    private boolean isHeadquarter;
-    private String swiftCode;
+public class DefaultResponseDTO {
+    private String message;
 }

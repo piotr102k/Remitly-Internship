@@ -1,5 +1,4 @@
-package remitly.bank_identifier_code.dto;
-
+package remitly.bank_identifier_code.dto.Bank;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
