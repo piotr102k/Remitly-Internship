@@ -1,4 +1,4 @@
-package remitly.bank_identifier_code.dto;
+package remitly.bank_identifier_code.dto.Bank;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
