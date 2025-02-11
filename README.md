@@ -12,7 +12,7 @@
 
 - After a successful connection, click "Create a new schema in the connected server" and name it swift
 
-- Nawigate to your desired directory and clone the repository
+- Navigate to your desired directory and clone the repository
 
 ```sh
 git clone https://github.com/piotr102k/Remitly-Internship.git
@@ -23,6 +23,8 @@ git clone https://github.com/piotr102k/Remitly-Internship.git
 ```sh
 mvn install
 ```
+
+- Swap the password in src/main/resources/application.properties to your password
 
 - Run the project which will automatically update your database
 
@@ -39,7 +41,7 @@ mvn test
 
 - To add the given SWIFT codes to your MySQL database after you are done setting up
 
-  - Right click on your schema and "press table import wizard"
+  - Right-click on your schema and "press table import wizard"
 
   - Find ParsedData.csv from the cloned repository and click next
 
