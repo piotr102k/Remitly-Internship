@@ -15,15 +15,11 @@ import lombok.Setter;
 @Entity
 @Table(name = "banks")
 public class Bank {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String address;
     private String bankName;
     private String countryISO2;
     private String countryName;
     private boolean isHeadquarter;
+    @Id
     private String swiftCode;
-
-
 }

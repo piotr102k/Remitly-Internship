@@ -4,15 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BankBranchDTO {
-    private String address;
-    private String bankName;
+public class BankCountryDTO {
     private String countryISO2;
-    private boolean isHeadquarter;
-    private String swiftCode;
+    private String countryName;
+    private List<BankBranchDTO> swiftCodes;
 }
